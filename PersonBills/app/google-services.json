@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "685912767752",
+    "project_id": "person-bills",
+    "storage_bucket": "person-bills.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:685912767752:android:ccb7fd5b749bd702ac00bd",
+        "android_client_info": {
+          "package_name": "com.aulas.personbills"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "685912767752-o4qdelvpg4un15mhre7spn4356tl9rvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlnP1i3VJJt2EnY63F6R7pvEWs07Xgfn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "685912767752-o4qdelvpg4un15mhre7spn4356tl9rvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
