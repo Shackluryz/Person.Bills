@@ -55,6 +55,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         incomeFragment=new IncomeFragment();
         expenseFragment=new ExpenseFragment();
 
+        setFragment(dashBoardFragment);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -64,9 +66,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                         bottomNavigationView.setItemBackgroundResource(R.color.dashboard_color);
                         return true;
                     case R.id.income:
+                        setFragment(incomeFragment);
                         bottomNavigationView.setItemBackgroundResource(R.color.income_color);
                         return true;
                     case R.id.expense:
+                        setFragment(expenseFragment);
                         bottomNavigationView.setItemBackgroundResource(R.color.expense_color);
                         return true;
                     default:
@@ -101,10 +105,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         switch (itemId) {
             case R.id.dashboard:
+                fragment=new DashBoardFragment();
                 break;
             case R.id.income:
+                fragment=new IncomeFragment();
                 break;
             case R.id.expense:
+                fragment=new ExpenseFragment();
                 break;
         }
 
