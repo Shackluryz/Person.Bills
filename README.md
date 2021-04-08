@@ -1,2 +1,2 @@
 # Person.Bills
-Mananger for personal bills - Android app
+Personal Bills Mananger - Android app
