@@ -7,6 +7,6 @@
     <color name="toolbar_color">#4CC5EA</color>
     <color name="nav_header">#3C9AB6</color>
     <color name="dashboard_color">#4CC5EA</color>
-    <color name="income_color">#4CAF50</color>
+    <color name="income_color">#8BC34A</color>
     <color name="expense_color">#F66257</color>
 </resources>
