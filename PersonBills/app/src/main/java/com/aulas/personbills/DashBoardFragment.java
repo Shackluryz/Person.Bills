@@ -1,17 +1,25 @@
 package com.aulas.personbills;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,6 +47,11 @@ public class DashBoardFragment extends Fragment {
 
     //Animation
     private Animation fadeOpen, fadeClose;
+
+    //Firebase
+    private FirebaseAuth mAuth;
+    private DatabaseReference mIncomeDatabase;
+    private DatabaseReference mExpenseDatabase;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -80,6 +93,13 @@ public class DashBoardFragment extends Fragment {
 
         //Inflate the layout for this fragment
         View myview=inflater.inflate(R.layout.fragment_dash_board, container, false);
+
+        mAuth=FirebaseAuth.getInstance();
+        FirebaseUser mUser=mAuth.getCurrentUser();
+        String uid=mUser.getUid();
+
+        mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
+        mExpenseDatabase=FirebaseDatabase.getInstance().getReference().child("ExpenseDatabase").child(uid);
 
         //Connect floating button to layout
         fab_main_btn=myview.findViewById(R.id.fb_main_plus_btn);
@@ -141,6 +161,7 @@ public class DashBoardFragment extends Fragment {
         fab_income_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                incomeDataInsert();
 
             }
         });
@@ -151,6 +172,59 @@ public class DashBoardFragment extends Fragment {
 
             }
         });
+
+    }
+
+    public void incomeDataInsert() {
+
+        AlertDialog.Builder myDialog=new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater=LayoutInflater.from(getActivity());
+        View myview=inflater.inflate(R.layout.custom_layout_for_insertdatas, null);
+        myDialog.setView(myview);
+        final AlertDialog dialog=myDialog.create();
+
+        final EditText edtAmount=myview.findViewById(R.id.amount_edt);
+        final EditText edtType=myview.findViewById(R.id.type_edt);
+        final EditText edtNote=myview.findViewById(R.id.note_edt);
+
+        Button btnSave=myview.findViewById(R.id.btnSave);
+        Button btnCancel=myview.findViewById(R.id.btnCancel);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String type=edtType.getText().toString().trim();
+                String amount=edtAmount.getText().toString().trim();
+                String note=edtNote.getText().toString().trim();
+
+                if(TextUtils.isEmpty(type)) {
+                    edtType.setError("Required Field...");
+                    return;
+                }
+                if(TextUtils.isEmpty(amount)) {
+                    edtAmount.setError("Required Field...");
+                    return;
+                }
+
+                int ouramountint=Integer.parseInt(amount);
+
+                if(TextUtils.isEmpty(note)) {
+                    edtNote.setError("Required Field...");
+                    return;
+                }
+
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        
+        dialog.show();
 
     }
 
