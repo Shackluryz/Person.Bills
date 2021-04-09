@@ -159,6 +159,39 @@ public class DashBoardFragment extends Fragment {
         return myview;
     }
 
+    //Floating button animation
+    private void fdAnimation() {
+
+        if(isOpen) {
+
+            fab_income_btn.startAnimation(fadeClose);
+            fab_expense_btn.startAnimation(fadeClose);
+            fab_income_btn.setClickable(false);
+            fab_expense_btn.setClickable(false);
+
+            fab_income_txt.startAnimation(fadeClose);
+            fab_expense_txt.startAnimation(fadeClose);
+            fab_income_txt.setClickable(false);
+            fab_expense_txt.setClickable(false);
+            isOpen=false;
+
+        }else{
+
+            fab_income_btn.startAnimation(fadeOpen);
+            fab_expense_btn.startAnimation(fadeOpen);
+            fab_income_btn.setClickable(true);
+            fab_expense_btn.setClickable(true);
+
+            fab_income_txt.startAnimation(fadeOpen);
+            fab_expense_txt.startAnimation(fadeOpen);
+            fab_income_txt.setClickable(true);
+            fab_expense_txt.setClickable(true);
+            isOpen=true;
+
+        }
+
+    }
+
     private void addData() {
 
         //Fab Button income
@@ -174,7 +207,7 @@ public class DashBoardFragment extends Fragment {
         fab_expense_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                expenseDataInsert();
             }
         });
 
@@ -186,7 +219,10 @@ public class DashBoardFragment extends Fragment {
         LayoutInflater inflater=LayoutInflater.from(getActivity());
         View myview=inflater.inflate(R.layout.custom_layout_for_insertdatas, null);
         myDialog.setView(myview);
+
         final AlertDialog dialog=myDialog.create();
+
+        dialog.setCancelable(false);
 
         final EditText edtAmount=myview.findViewById(R.id.amount_edt);
         final EditText edtType=myview.findViewById(R.id.type_edt);
@@ -226,6 +262,8 @@ public class DashBoardFragment extends Fragment {
                 mIncomeDatabase.child(id).setValue(data);
 
                 Toast.makeText(getActivity(), "Data ADDED", Toast.LENGTH_LONG).show();
+
+                fdAnimation();
                 dialog.dismiss();
 
             }
@@ -234,10 +272,67 @@ public class DashBoardFragment extends Fragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                fdAnimation();
                 dialog.dismiss();
             }
         });
         
+        dialog.show();
+
+    }
+
+    public void expenseDataInsert() {
+
+        AlertDialog.Builder mydialog=new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater=LayoutInflater.from(getActivity());
+        View myview=inflater.inflate(R.layout.custom_layout_for_insertdatas, null);
+        mydialog.setView(myview);
+
+        final AlertDialog dialog=mydialog.create();
+
+        dialog.setCancelable(false);
+
+        final EditText edtAmount=myview.findViewById(R.id.amount_edt);
+        final EditText edtType=myview.findViewById(R.id.type_edt);
+        final EditText edtNote=myview.findViewById(R.id.note_edt);
+
+        Button btnSave=myview.findViewById(R.id.btnSave);
+        Button btnCancel=myview.findViewById(R.id.btnCancel);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String tmAmount=edtAmount.getText().toString().trim();
+                String tmType=edtType.getText().toString().trim();
+                String tmNote=edtNote.getText().toString().trim();
+
+                if(TextUtils.isEmpty(tmAmount)) {
+                    edtAmount.setError("Required Field...");
+                    return;
+                }
+                if(TextUtils.isEmpty(tmType)) {
+                    edtType.setError("Required Field...");
+                    return;
+                }
+                if(TextUtils.isEmpty(tmNote)) {
+                    edtNote.setError("Required Field...");
+                    return;
+                }
+
+                fdAnimation();
+
+            }
+        });
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fdAnimation();
+                dialog.dismiss();
+            }
+        });
+
         dialog.show();
 
     }
