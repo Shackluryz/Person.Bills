@@ -5,8 +5,11 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="toolbar_color">#4CC5EA</color>
-    <color name="nav_header">#3C9AB6</color>
+    <color name="nav_header">#45A7C5</color>
     <color name="dashboard_color">#4CC5EA</color>
     <color name="income_color">#8BC34A</color>
     <color name="expense_color">#F66257</color>
+    <color name="date_color">#45A7C5</color>
+    <color name="income_amount">#4CAF50</color>
+    <color name="expense_amount">#F44336</color>
 </resources>

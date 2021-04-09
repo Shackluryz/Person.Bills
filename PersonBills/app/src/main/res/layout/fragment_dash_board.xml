@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|end"
-                android:backgroundTint="#07bca4"
+                android:backgroundTint="#D3534A"
                 android:elevation="7dp"
                 android:visibility="invisible"
                 android:src="@drawable/expense"
@@ -177,7 +177,7 @@
             android:layout_gravity="bottom|end"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="20dp"
-            android:backgroundTint="#8BC34A"
+            android:backgroundTint="#47C9DA"
             android:src="@drawable/income"
             app:fabSize="normal"/>
 
