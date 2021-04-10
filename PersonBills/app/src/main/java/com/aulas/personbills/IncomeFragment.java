@@ -89,12 +89,10 @@ public class IncomeFragment extends Fragment {
         ) {
             @Override
             protected void populateViewHolder(MyViewHolder viewHolder, Data modal, int position) {
-
                 viewHolder.setType(modal.getType());
                 viewHolder.setNote(modal.getNote());
                 viewHolder.setDate(modal.getDate());
                 viewHolder.setAmount(modal.getAmount());
-
             }
         };
 
@@ -111,32 +109,24 @@ public class IncomeFragment extends Fragment {
         }
 
         private void setType(String type) {
-
             TextView mType = mView.findViewById(R.id.type_txt_income);
             mType.setText(type);
-
         }
 
         private void setNote(String note) {
-
             TextView mNote = mView.findViewById(R.id.note_txt_income);
             mNote.setText(note);
-
         }
 
         private void setDate(String date) {
-
             TextView mDate = mView.findViewById(R.id.date_txt_income);
             mDate.setText(date);
-
         }
 
         private void setAmount(int amount) {
-
             TextView mAmount = mView.findViewById(R.id.amount_txt_income);
             String stAmount = String.valueOf(amount);
             mAmount.setText(stAmount);
-
         }
 
     }
