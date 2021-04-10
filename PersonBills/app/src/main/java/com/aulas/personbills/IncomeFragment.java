@@ -50,6 +50,13 @@ public class IncomeFragment extends Fragment {
     private Button btnDelete;
     private Button btnUpdate;
 
+    //Data Item Value
+    private String type;
+    private String note;
+    private int amount;
+
+    private String post_key;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -102,7 +109,7 @@ public class IncomeFragment extends Fragment {
                 Data.class, R.layout.income_recycler_data, MyViewHolder.class, mIncomeDatabase
         ) {
             @Override
-            protected void populateViewHolder(MyViewHolder viewHolder, Data modal, int position) {
+            protected void populateViewHolder(MyViewHolder viewHolder, final Data modal, final int position) {
                 viewHolder.setType(modal.getType());
                 viewHolder.setNote(modal.getNote());
                 viewHolder.setDate(modal.getDate());
@@ -111,6 +118,13 @@ public class IncomeFragment extends Fragment {
                 viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
+                        post_key = getRef(position).getKey();
+
+                        type = modal.getType();
+                        note = modal.getNote();
+                        amount = modal.getAmount();
+
                         updateDataItem();
                     }
                 });
@@ -161,6 +175,16 @@ public class IncomeFragment extends Fragment {
         edtAmount = myView.findViewById(R.id.amount_edt);
         edtType = myView.findViewById(R.id.type_edt);
         edtNote = myView.findViewById(R.id.note_edt);
+
+        //Set data to edit text
+        edtType.setText(type);
+        edtType.setSelection(type.length());
+
+        edtNote.setText(note);
+        edtNote.setSelection(note.length());
+
+        edtAmount.setText(String.valueOf(amount));
+        edtAmount.setSelection(String.valueOf(amount).length());
 
         btnUpdate = myView.findViewById(R.id.btnUpdate);
         btnDelete = myView.findViewById(R.id.btnDelete);
