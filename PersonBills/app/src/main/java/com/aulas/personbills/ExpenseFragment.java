@@ -88,7 +88,7 @@ public class ExpenseFragment extends Fragment {
                     Data data = mysnapshot.getValue(Data.class);
                     totalValue += data.getAmount();
                     String stTotalValue = String.valueOf(totalValue);
-                    expenseTotalSum.setText(stTotalValue);
+                    expenseTotalSum.setText(stTotalValue+".00");
                 }
             }
 
