@@ -1,5 +1,6 @@
 package com.aulas.personbills;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -23,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.zip.Inflater;
+
 
 public class IncomeFragment extends Fragment {
 
@@ -35,6 +40,15 @@ public class IncomeFragment extends Fragment {
 
     //Text View
     private TextView incomeTotalSum;
+
+    //Update edit text
+    private EditText edtAmount;
+    private EditText edtType;
+    private EditText edtNote;
+
+    //Button for Update and Delete
+    private Button btnDelete;
+    private Button btnUpdate;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -93,6 +107,13 @@ public class IncomeFragment extends Fragment {
                 viewHolder.setNote(modal.getNote());
                 viewHolder.setDate(modal.getDate());
                 viewHolder.setAmount(modal.getAmount());
+
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        updateDataItem();
+                    }
+                });
             }
         };
 
@@ -129,5 +150,37 @@ public class IncomeFragment extends Fragment {
             mAmount.setText(stAmount);
         }
 
+    }
+
+    private void updateDataItem() {
+        AlertDialog.Builder mydialog = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = LayoutInflater.from(getActivity());
+        View myView = inflater.inflate(R.layout.update_data_item, null);
+        mydialog.setView(myView);
+
+        edtAmount = myView.findViewById(R.id.amount_edt);
+        edtType = myView.findViewById(R.id.type_edt);
+        edtNote = myView.findViewById(R.id.note_edt);
+
+        btnUpdate = myView.findViewById(R.id.btnUpdate);
+        btnDelete = myView.findViewById(R.id.btnDelete);
+
+        final AlertDialog dialog = mydialog.create();
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
     }
 }
