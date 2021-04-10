@@ -55,7 +55,7 @@ public class ExpenseFragment extends Fragment {
     private int amount;
 
     private String post_key;
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
