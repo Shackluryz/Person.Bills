@@ -1,5 +1,6 @@
 # Person.Bills
 Projeto: Person Bills - Android app
+
 Description: Personal bills mananger application developed for the Mobile Programming Technical Language course.
 
 Institution: UniProjeção
