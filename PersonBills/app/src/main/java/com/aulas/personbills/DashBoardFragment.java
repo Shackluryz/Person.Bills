@@ -81,6 +81,9 @@ public class DashBoardFragment extends Fragment {
 
         mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
         mExpenseDatabase=FirebaseDatabase.getInstance().getReference().child("ExpenseDatabase").child(uid);
+        
+        mIncomeDatabase.keepSynced(true);
+        mExpenseDatabase.keepSynced(true);
 
         //Connect floating button to layout
         fab_main_btn=myview.findViewById(R.id.fb_main_plus_btn);
@@ -411,8 +414,19 @@ public class DashBoardFragment extends Fragment {
                 viewHolder.setIncomeDate(modal.getDate());
             }
         };
-
         mRecyclerIncome.setAdapter(incomeAdapter);
+
+        FirebaseRecyclerAdapter<Data, ExpenseViewHolder>expenseAdapter=new FirebaseRecyclerAdapter<Data, ExpenseViewHolder>(
+                Data.class, R.layout.dashboard_expense, DashBoardFragment.ExpenseViewHolder.class, mExpenseDatabase
+        ) {
+            @Override
+            protected void populateViewHolder(ExpenseViewHolder viewHolder, Data modal, int position) {
+                viewHolder.setExpenseType(modal.getType());
+                viewHolder.setExpenseAmount(modal.getAmount());
+                viewHolder.setExpenseDate(modal.getDate());
+            }
+        };
+        mRecyclerExpense.setAdapter(expenseAdapter);
     }
 
     //For Income Data
@@ -440,6 +454,33 @@ public class DashBoardFragment extends Fragment {
             TextView mDate = mIncomeView.findViewById(R.id.date_income_ds);
             mDate.setText(date);
 
+        }
+    }
+
+    //For Expense Data
+    public static class ExpenseViewHolder extends RecyclerView.ViewHolder {
+
+        View mExpenseView;
+
+        public ExpenseViewHolder(View itemView) {
+            super(itemView);
+            mExpenseView = itemView;
+        }
+
+        public void setExpenseType(String type) {
+            TextView mType = mExpenseView.findViewById(R.id.type_expense_ds);
+            mType.setText(type);
+        }
+
+        public void setExpenseAmount(int amount) {
+            TextView mAmount = mExpenseView.findViewById(R.id.amount_expense_ds);
+            String stAmount = String.valueOf(amount);
+            mAmount.setText(stAmount);
+        }
+
+        public void setExpenseDate(String date) {
+            TextView mDate = mExpenseView.findViewById(R.id.date_expense_ds);
+            mDate.setText(date);
         }
     }
 }
