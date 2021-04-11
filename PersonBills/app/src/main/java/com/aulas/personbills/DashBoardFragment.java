@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aulas.personbills.Modal.Data;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -396,4 +397,49 @@ public class DashBoardFragment extends Fragment {
 
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        FirebaseRecyclerAdapter<Data, IncomeViewHolder>incomeAdapter=new FirebaseRecyclerAdapter<Data, IncomeViewHolder>(
+                Data.class, R.layout.dashboard_income, DashBoardFragment.IncomeViewHolder.class, mIncomeDatabase
+        ) {
+            @Override
+            protected void populateViewHolder(IncomeViewHolder viewHolder, Data modal, int position) {
+                viewHolder.setIncomeType(modal.getType());
+                viewHolder.setIncomeAmount(modal.getAmount());
+                viewHolder.setIncomeDate(modal.getDate());
+            }
+        };
+
+        mRecyclerIncome.setAdapter(incomeAdapter);
+    }
+
+    //For Income Data
+    public static class IncomeViewHolder extends RecyclerView.ViewHolder {
+
+        View mIncomeView;
+
+        public IncomeViewHolder(View itemView) {
+            super(itemView);
+            mIncomeView = itemView;
+        }
+
+        public void setIncomeType(String type) {
+            TextView mType = mIncomeView.findViewById(R.id.type_income_ds);
+            mType.setText(type);
+        }
+
+        public void setIncomeAmount(int amount) {
+            TextView mAmount = mIncomeView.findViewById(R.id.amount_income_ds);
+            String stAmount = String.valueOf(amount);
+            mAmount.setText(stAmount);
+        }
+
+        public void setIncomeDate(String date) {
+            TextView mDate = mIncomeView.findViewById(R.id.date_income_ds);
+            mDate.setText(date);
+
+        }
+    }
 }
