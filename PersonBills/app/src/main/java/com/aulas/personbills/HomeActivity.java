@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -17,6 +18,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -28,6 +30,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private IncomeFragment incomeFragment;
     private ExpenseFragment expenseFragment;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar=findViewById(R.id.my_toolbar);
         toolbar.setTitle("Person Bills");
         setSupportActionBar(toolbar);
+
+        mAuth=FirebaseAuth.getInstance();
 
         bottomNavigationView=findViewById(R.id.bottomNavigationbar);
         frameLayout=findViewById(R.id.main_frame);
@@ -112,6 +118,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.expense:
                 fragment=new ExpenseFragment();
+                break;
+            case R.id.logout:
+                mAuth.signOut();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 break;
         }
 

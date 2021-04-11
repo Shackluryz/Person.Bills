@@ -81,7 +81,7 @@ public class DashBoardFragment extends Fragment {
 
         mIncomeDatabase= FirebaseDatabase.getInstance().getReference().child("IncomeData").child(uid);
         mExpenseDatabase=FirebaseDatabase.getInstance().getReference().child("ExpenseDatabase").child(uid);
-        
+
         mIncomeDatabase.keepSynced(true);
         mExpenseDatabase.keepSynced(true);
 
