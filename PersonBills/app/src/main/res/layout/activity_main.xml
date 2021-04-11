@@ -22,9 +22,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Log In"
+                android:text="Person Bills"
                 android:textAppearance="?android:textAppearanceLarge"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="50dp"/>
 
             <EditText
                 android:id="@+id/email_login"
