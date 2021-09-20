@@ -1,7 +1,7 @@
 # Person.Bills
-Projeto: Person Bills - Android app
+Project: Person Bills - Android app
 
-Descrição: Aplicativo para controle de contar pessoais.
+Description: Application for Android platform with functionality to help control personal bills.
 
 Tools: Android Studio 4.1.3v
 Database: Firebase
