@@ -1,4 +1,4 @@
-# Person_Bills
+# Person Bills
 Project: Person Bills - Android app
 
 Description: Application for Android platform with functionality to help control personal bills.
